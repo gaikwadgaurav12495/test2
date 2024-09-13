@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BMC Remedy Dashboard</title>
+    <title>BMC Remedy-like Dashboard</title>
     <style>
         /* Global Styling */
         body {
@@ -72,7 +72,6 @@
             font-weight: 500;
         }
 
-        /* Sidebar Active State */
         .sidebar ul li.active {
             background-color: #026199;
             border-left: 4px solid #ffcc00;
@@ -120,47 +119,35 @@
             margin-bottom: 20px;
         }
 
-        .module-content {
-            background-color: #f5f7fa;
-            height: 200px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #555;
-            font-size: 18px;
-            border-radius: 6px;
-            transition: background-color 0.3s, color 0.3s;
+        /* Updated Stat Table for better spacing */
+        .module-stats {
+            width: 100%;
+            border-collapse: collapse;
         }
 
-        .module:hover .module-content {
+        .module-stats th,
+        .module-stats td {
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+            color: #555;
+        }
+
+        .module-stats th {
+            background-color: #f5f7fa;
+            font-size: 20px;
+            font-weight: bold;
+            color: #00447c;
+        }
+
+        .module-stats td {
+            background-color: #f9f9f9;
+        }
+
+        .module:hover .module-stats th,
+        .module:hover .module-stats td {
             background-color: #00447c;
             color: white;
-        }
-
-        /* Advanced Styling for Widgets */
-        .module-stats {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 15px;
-        }
-
-        .module-stats .stat {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            font-size: 16px;
-        }
-
-        .module-stats .stat h4 {
-            font-size: 30px;
-            color: #00447c;
-            margin: 5px 0;
-        }
-
-        .module-stats .stat p {
-            margin: 0;
-            color: #777;
         }
 
         /* Footer Styling */
@@ -199,10 +186,6 @@
             .module-content {
                 font-size: 14px;
             }
-
-            .module-stats .stat h4 {
-                font-size: 25px;
-            }
         }
 
         @media (max-width: 480px) {
@@ -221,10 +204,6 @@
             .module-content {
                 font-size: 12px;
             }
-
-            .module-stats .stat h4 {
-                font-size: 20px;
-            }
         }
     </style>
 </head>
@@ -233,7 +212,7 @@
 
     <!-- Header -->
     <header>
-        <h1>BMC Remedy Dashboard</h1>
+        <h1>BMC Remedy-like Dashboard</h1>
     </header>
 
     <!-- Sidebar -->
@@ -253,60 +232,62 @@
             <!-- Open Tickets Module -->
             <div class="module">
                 <h3>Open Tickets</h3>
-                <div class="module-content">
-                    <div class="module-stats">
-                        <div class="stat">
-                            <h4>24</h4>
-                            <p>Open Tickets</p>
-                        </div>
-                        <div class="stat">
-                            <h4>12</h4>
-                            <p>Critical</p>
-                        </div>
-                        <div class="stat">
-                            <h4>8</h4>
-                            <p>Pending</p>
-                        </div>
-                    </div>
-                </div>
+                <table class="module-stats">
+                    <thead>
+                        <tr>
+                            <th>Open Tickets</th>
+                            <th>Critical</th>
+                            <th>Pending</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>24</td>
+                            <td>12</td>
+                            <td>8</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <!-- Service Requests Module -->
             <div class="module">
                 <h3>Service Requests</h3>
-                <div class="module-content">
-                    <div class="module-stats">
-                        <div class="stat">
-                            <h4>18</h4>
-                            <p>Pending Requests</p>
-                        </div>
-                        <div class="stat">
-                            <h4>5</h4>
-                            <p>High Priority</p>
-                        </div>
-                        <div class="stat">
-                            <h4>3</h4>
-                            <p>New Requests</p>
-                        </div>
-                    </div>
-                </div>
+                <table class="module-stats">
+                    <thead>
+                        <tr>
+                            <th>Pending Requests</th>
+                            <th>High Priority</th>
+                            <th>New Requests</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>18</td>
+                            <td>5</td>
+                            <td>3</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <!-- Change Management Module -->
             <div class="module">
                 <h3>Change Management</h3>
-                <div class="module-content">
-                    <div class="module-stats">
-                        <div class="stat">
-                            <h4>10</h4>
-                            <p>Active Changes</p>
-                        </div>
-                        <div class="stat">
-                            <h4>3</h4>
-                            <p>Emergency</p>
-                        </div>
-                    </div>
-                </div>
+                <table class="module-stats">
+                    <thead>
+                        <tr>
+                            <th>Active Changes</th>
+                            <th>Emergency</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>10</td>
+                            <td>3</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
 
             <!-- Reports Module -->
@@ -322,4 +303,8 @@
     <!-- Footer -->
     <footer>
         © 2024 Foo App - All Rights Reserved
-   
+    </footer>
+
+</body>
+
+</html>
