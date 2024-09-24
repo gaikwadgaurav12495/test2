@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Netflix</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header class="navbar">
         <div class="logo">
             <h1>MyNetflix</h1>
         </div>
         <nav>
-            <ul>
+            <ul class="nav-links">
                 <li><a href="#">Home</a></li>
                 <li><a href="#">Series</a></li>
                 <li><a href="#">Movies</a></li>
@@ -24,33 +26,35 @@
 
     <main>
         <section class="hero-banner">
-            <h2>Unlimited movies, TV shows, and more.</h2>
-            <p>Watch anywhere. Cancel anytime.</p>
-            <button class="hero-button">Join Now</button>
+            <div class="hero-content">
+                <h2>Unlimited movies, TV shows, and more.</h2>
+                <p>Watch anywhere. Cancel anytime.</p>
+                <button class="hero-button">Join Now</button>
+            </div>
         </section>
 
         <section class="movie-carousel">
             <h2>Trending Now</h2>
             <div class="carousel">
                 <div class="movie-item">
-                    <img src="https://via.placeholder.com/150x225" alt="Movie 1">
-                    <h3>Movie Title 1</h3>
+                    <img src="https://image.tmdb.org/t/p/w200/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg" alt="Spider-Man: No Way Home">
+                    <h3>Spider-Man: No Way Home</h3>
                 </div>
                 <div class="movie-item">
-                    <img src="https://via.placeholder.com/150x225" alt="Movie 2">
-                    <h3>Movie Title 2</h3>
+                    <img src="https://image.tmdb.org/t/p/w200/5P8SmMzSNYikXpxil6BYzJ16611.jpg" alt="The Batman">
+                    <h3>The Batman</h3>
                 </div>
                 <div class="movie-item">
-                    <img src="https://via.placeholder.com/150x225" alt="Movie 3">
-                    <h3>Movie Title 3</h3>
+                    <img src="https://image.tmdb.org/t/p/w200/kqjL17yufvn9OVLyXYpvtyrFfak.jpg" alt="Avengers: Endgame">
+                    <h3>Avengers: Endgame</h3>
                 </div>
                 <div class="movie-item">
-                    <img src="https://via.placeholder.com/150x225" alt="Movie 4">
-                    <h3>Movie Title 4</h3>
+                    <img src="https://image.tmdb.org/t/p/w200/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg" alt="Inception">
+                    <h3>Inception</h3>
                 </div>
                 <div class="movie-item">
-                    <img src="https://via.placeholder.com/150x225" alt="Movie 5">
-                    <h3>Movie Title 5</h3>
+                    <img src="https://image.tmdb.org/t/p/w200/4j0PNHkMr5ax3IA8tjtxcmPU3QT.jpg" alt="Black Panther: Wakanda Forever">
+                    <h3>Black Panther: Wakanda Forever</h3>
                 </div>
             </div>
         </section>
@@ -59,80 +63,127 @@
     <footer>
         <p>&copy; 2024 MyNetflix, Inc. All rights reserved.</p>
     </footer>
-    
+
     <style>
-        body {
-            font-family: Arial, sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: #141414;
-            color: white;
+            box-sizing: border-box;
         }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #141414;
+            color: #fff;
+            line-height: 1.6;
+        }
+
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             background-color: #e50914;
-            padding: 20px;
+            padding: 15px 20px;
         }
-        .navbar .logo h1 {
-            margin: 0;
+
+        .logo h1 {
             font-size: 24px;
-        }
-        .navbar nav ul {
-            list-style: none;
-            padding: 0;
             margin: 0;
+            color: #fff;
+        }
+
+        .nav-links {
+            list-style: none;
             display: flex;
             gap: 20px;
         }
-        .navbar nav ul li a {
+
+        .nav-links li a {
             color: white;
             text-decoration: none;
+            transition: color 0.3s ease;
         }
+
+        .nav-links li a:hover {
+            color: #b3b3b3;
+        }
+
         .hero-banner {
-            background: url('https://via.placeholder.com/1280x720') no-repeat center center;
-            background-size: cover;
-            padding: 80px 20px;
+            background: url('https://image.tmdb.org/t/p/original/t/p/w1280//3nRpxgAAdqdm0qJ5yC81bpjAEN9.jpg') no-repeat center center/cover;
+            padding: 100px 20px;
             text-align: center;
         }
+
+        .hero-content {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
         .hero-banner h2 {
-            font-size: 36px;
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero-banner p {
+            font-size: 18px;
             margin-bottom: 20px;
         }
+
         .hero-button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             background-color: #e50914;
             border: none;
-            color: white;
-            font-size: 18px;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 20px;
             cursor: pointer;
+            transition: background-color 0.3s ease;
         }
+
+        .hero-button:hover {
+            background-color: #f40612;
+        }
+
         .movie-carousel {
-            padding: 20px;
+            padding: 40px 20px;
         }
+
         .movie-carousel h2 {
-            font-size: 24px;
+            font-size: 32px;
             margin-bottom: 20px;
         }
+
         .carousel {
             display: flex;
+            gap: 20px;
             overflow-x: auto;
-            gap: 15px;
+            scroll-behavior: smooth;
         }
+
         .movie-item {
-            flex: 0 0 auto;
-            width: 150px;
+            flex: 0 0 150px;
+            text-align: center;
         }
+
         .movie-item img {
             width: 100%;
-            border-radius: 4px;
+            border-radius: 8px;
         }
+
+        .movie-item h3 {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
         footer {
             text-align: center;
             padding: 20px;
             background-color: #222;
+            color: #aaa;
         }
     </style>
 </body>
+
 </html>
