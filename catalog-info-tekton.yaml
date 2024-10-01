@@ -2,34 +2,54 @@ apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
   name: deploy-app-pipeline
-  description: "Pipeline for deploying applications to OpenShift with customizable parameters."
+  description: "Deploy App with OpenShift Pipeline. Requires parameters: repository-url, image-name, deployment-name, configmap-name, pvc-name, namespace."
   annotations:
     backstage.io/kubernetes-id: deploy-app-pipeline
-    backstage.io/kubernetes-namespace: backstage
-    tekton.dev/pipeline: "true"  # Important for Tekton integration
-spec:
-  type: service  # Ensure it's set to 'service'
-  lifecycle: production
-  owner: "dev-hub-team"
-  system: pipeline
-  providesApis:
-    - pipeline-api
-  links:
-    - url: https://github.com/jay2tinku/techzone-pipeline-demo
-      title: Pipeline Repository
-      icon: github
-    - url: https://console-openshift-console.apps.66a64ff6d70fa4001ee0caae.ocp.techzone.ibm.com/dev-pipelines/ns/backstage
-      title: OpenShift Pipelines
-      icon: web
+    backstage.io/kubernetes-namespace: backstage  # Default namespace
+    janus-idp.io/tekton-enabled: 'true'
+    backstage.io/kubernetes-label-selector: 'app=web'
+    app.openshift.io/connects-to: '[{"apiVersion":"apps.openshift.io/v1","kind":"Deployment"}]'
+    backstage.io/source-location: url:https://github.com/jay2tinku/techzone-pipeline-demo.git
+    backstage.io/techdocs-ref: url:https://github.com/jay2tinku/techzone-pipeline-demo.git
+    janus-idp.io/tekton: backstage
+    tektonci/build-namespace: backstage
+    argocd/app-name: backstage
+    tekton.dev/pipeline: "true"
+  labels:
+    backstage.io/kubernetes-id: tekton-demo
+    app: deploy-app-pipeline  # Custom label for the pipeline
+    environment: production    # Environment label (can be staging, development, etc.)
+    type: pipeline              # Type of resource
   tags:
     - tekton
     - pipeline
     - deployment
     - openshift
+  links:
+    - url: https://console-openshift-console.apps.66a64ff6d70fa4001ee0caae.ocp.techzone.ibm.com/dev-pipelines/ns/{{namespace}}  # Use placeholder for dynamic namespace
+      title: OpenShift Pipelines
+      icon: web
+    - url: https://github.com/jay2tinku/techzone-pipeline-demo/blob/main/README.md
+      title: Pipeline Documentation
+      icon: book
+spec:
+  type: service
+  lifecycle: production
+  owner: "dev-hub-team"
+  system: pipeline
+  providesApis:
+    - pipeline-api
+  selector:
+    matchLabels:
+      app: deploy-app-pipeline  # Selector matching the custom label
+      environment: production     # Include any relevant labels for selection
 ---
 apiVersion: backstage.io/v1alpha1
 kind: System
 metadata:
-  name: pipeline
+  name: backstage
+  tags:
+    - pipeline
+    - demo
 spec:
   owner: "dev-hub-team"
