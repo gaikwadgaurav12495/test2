@@ -1,0 +1,35 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: deploy-app-pipeline
+  description: "Pipeline for deploying applications to OpenShift with customizable parameters."
+  annotations:
+    backstage.io/kubernetes-id: deploy-app-pipeline
+    backstage.io/kubernetes-namespace: backstage
+    tekton.dev/pipeline: "true"  # Important for Tekton integration
+spec:
+  type: service  # Ensure it's set to 'service'
+  lifecycle: production
+  owner: "dev-hub-team"
+  system: pipeline
+  providesApis:
+    - pipeline-api
+  links:
+    - url: https://github.com/jay2tinku/techzone-pipeline-demo
+      title: Pipeline Repository
+      icon: github
+    - url: https://console-openshift-console.apps.66a64ff6d70fa4001ee0caae.ocp.techzone.ibm.com/dev-pipelines/ns/backstage
+      title: OpenShift Pipelines
+      icon: web
+  tags:
+    - tekton
+    - pipeline
+    - deployment
+    - openshift
+---
+apiVersion: backstage.io/v1alpha1
+kind: System
+metadata:
+  name: pipeline
+spec:
+  owner: "dev-hub-team"
