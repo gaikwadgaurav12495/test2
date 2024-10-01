@@ -1,0 +1,9 @@
+apiVersion: backstage.io/v1alpha1
+kind: Group
+metadata:
+  name: dev-hub-team
+  description: "Team responsible for development hub"
+spec:
+  type: team
+  owners:
+    - user: gaikwadgaurav12495
