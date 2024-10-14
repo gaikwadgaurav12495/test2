@@ -1,0 +1,99 @@
+apiVersion: backstage.io/v1alpha1
+kind: Template
+metadata:
+  name: httpd-server-deployment
+  title: HTTPD Server Deployment with GitOps
+  description: Scaffold a Tekton pipeline to deploy an HTTPD server using a GitOps process with ArgoCD.
+  tags:
+    - Tekton
+    - GitOps
+    - ArgoCD
+    - HTTPD
+spec:
+  owner: your-team
+  type: service
+
+  parameters:
+    - title: Application Details
+      required:
+        - appName
+        - namespace
+        - configmapName
+        - imageName
+        - configRepoUrl
+      properties:
+        appName:
+          type: string
+          title: Application Name
+          description: The name of the HTTPD application.
+        namespace:
+          type: string
+          title: Kubernetes Namespace
+          description: The namespace where the application will be deployed.
+          default: "default"
+        configmapName:
+          type: string
+          title: ConfigMap Name
+          description: The name of the ConfigMap that holds the HTTP server’s content.
+        imageName:
+          type: string
+          title: HTTPD Container Image
+          description: The image to use for deploying the HTTPD server.
+          default: "registry.redhat.io/rhel8/httpd-24:latest"
+        configRepoUrl:
+          type: string
+          title: GitLab Repository URL
+          description: The URL of the GitLab repository to store manifest files for GitOps.
+          examples:
+            - https://gitlab.apps.6705246d5afee30585aa6fa6.ocp.techzone.ibm.com/your-repo.git
+
+  steps:
+    - id: generate
+      name: Generate Tekton Pipeline
+      action: scaffolder:tekton-pipeline:run
+      input:
+        parameters:
+          appName: ${{ parameters.appName }}
+          namespace: ${{ parameters.namespace }}
+          configmapName: ${{ parameters.configmapName }}
+          imageName: ${{ parameters.imageName }}
+          configRepoUrl: ${{ parameters.configRepoUrl }}
+      output: 
+        tektonManifest: "tekton/pipeline.yaml"
+
+    - id: pushToGitlab
+      name: Push Manifests to GitLab
+      action: scaffolder:gitlab:push
+      input:
+        repositoryUrl: ${{ parameters.configRepoUrl }}
+        files:
+          - sourcePath: tekton/pipeline.yaml
+            targetPath: tekton/pipeline.yaml
+      output:
+        remoteUrl: ${{ steps.pushToGitlab.output.repositoryUrl }}
+
+    - id: register
+      name: Register Component in Backstage Catalog
+      action: scaffolder:backstage:register
+      input:
+        repoUrl: ${{ parameters.configRepoUrl }}
+        catalogInfoPath: "/catalog-info.yaml"
+      output:
+        entityRef: ${{ steps.register.output.entityRef }}
+
+    - id: deployWithArgoCD
+      name: Trigger ArgoCD Sync
+      action: scaffolder:argocd:sync
+      input:
+        appName: ${{ parameters.appName }}
+        configRepoUrl: ${{ parameters.configRepoUrl }}
+        namespace: ${{ parameters.namespace }}
+        argocdUrl: "https://argocd-server-argocd.apps.6705246d5afee30585aa6fa6.ocp.techzone.ibm.com"
+
+  output:
+    links:
+      - title: Source Code Repository
+        url: ${{ steps.pushToGitlab.output.remoteUrl }}
+      - title: Open Component in Catalog
+        icon: catalog
+        entityRef: ${{ steps.register.output.entityRef }}
