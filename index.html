@@ -4,307 +4,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>BMC Remedy Dashboard</title>
-    <style>
-        /* Global Styling */
-        body {
-            font-family: 'Segoe UI', Tahoma, sans-serif;
-            background-color: #eceff1;
-            margin: 0;
-            padding: 0;
-            color: #333;
-            line-height: 1.6;
-        }
-
-        /* Header Styling */
-        header {
-            background-color: #00447c;
-            color: white;
-            padding: 15px 0;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-        }
-
-        header h1 {
-            margin: 0;
-            text-align: center;
-            text-transform: uppercase;
-            font-size: 24px;
-            font-weight: 500;
-            letter-spacing: 1.5px;
-        }
-
-        /* Sidebar Styling */
-        .sidebar {
-            background-color: #01314b;
-            width: 240px;
-            height: 100vh;
-            position: fixed;
-            top: 60px;
-            left: 0;
-            padding: 40px 0;
-            z-index: 999;
-        }
-
-        .sidebar ul {
-            list-style-type: none;
-            padding: 0;
-        }
-
-        .sidebar ul li {
-            padding: 15px 25px;
-            border-bottom: 1px solid #1e526c;
-            transition: background-color 0.3s;
-        }
-
-        .sidebar ul li:hover {
-            background-color: #026199;
-        }
-
-        .sidebar ul li a {
-            color: #d9e1e8;
-            text-decoration: none;
-            font-size: 16px;
-            font-weight: 500;
-        }
-
-        .sidebar ul li.active {
-            background-color: #026199;
-            border-left: 4px solid #ffcc00;
-        }
-
-        .sidebar ul li.active a {
-            color: #ffffff;
-            font-weight: bold;
-        }
-
-        /* Main Content Styling */
-        .content {
-            margin-left: 260px;
-            padding: 80px 40px;
-            background-color: #eceff1;
-            min-height: 100vh;
-        }
-
-        .dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 30px;
-        }
-
-        /* Module Styling */
-        .module {
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-        }
-
-        .module:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-        }
-
-        .module h3 {
-            font-size: 22px;
-            color: #00447c;
-            border-bottom: 2px solid #eceff1;
-            padding-bottom: 10px;
-            margin-bottom: 20px;
-        }
-
-        /* Updated Stat Table for better spacing */
-        .module-stats {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        .module-stats th,
-        .module-stats td {
-            padding: 15px;
-            text-align: center;
-            font-size: 18px;
-            color: #555;
-        }
-
-        .module-stats th {
-            background-color: #f5f7fa;
-            font-size: 20px;
-            font-weight: bold;
-            color: #00447c;
-        }
-
-        .module-stats td {
-            background-color: #f9f9f9;
-        }
-
-        .module:hover .module-stats th,
-        .module:hover .module-stats td {
-            background-color: #00447c;
-            color: white;
-        }
-
-        /* Footer Styling */
-        footer {
-            text-align: center;
-            padding: 20px;
-            background-color: #00447c;
-            color: white;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
-            z-index: 1000;
-            font-size: 14px;
-        }
-
-        /* Responsive Breakpoints */
-        @media (max-width: 1200px) {
-            .module-content {
-                font-size: 16px;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .sidebar {
-                width: 200px;
-            }
-
-            .content {
-                margin-left: 220px;
-            }
-
-            .module h3 {
-                font-size: 18px;
-            }
-
-            .module-content {
-                font-size: 14px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .sidebar {
-                width: 150px;
-            }
-
-            .content {
-                margin-left: 160px;
-            }
-
-            .module h3 {
-                font-size: 16px;
-            }
-
-            .module-content {
-                font-size: 12px;
-            }
-        }
-    </style>
+    <title>Netflix</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-
-    <!-- Header -->
-    <header>
-        <h1>BMC Remedy - Dashboard</h1>
+    <header class="navbar">
+        <div class="logo">
+            <h1>MyNetflix</h1>
+        </div>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Series</a></li>
+                <li><a href="#">Movies</a></li>
+                <li><a href="#">My List</a></li>
+                <li><a href="#">Log In</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- Sidebar -->
-    <div class="sidebar">
-        <ul>
-            <li class="active"><a href="#">Dashboard</a></li>
-            <li><a href="#">Tickets</a></li>
-            <li><a href="#">Change Management</a></li>
-            <li><a href="#">Service Requests</a></li>
-            <li><a href="#">Reports</a></li>
-        </ul>
-    </div>
-
-    <!-- Main Content -->
-    <div class="content">
-        <div class="dashboard">
-            <!-- Open Tickets Module -->
-            <div class="module">
-                <h3>Open Tickets</h3>
-                <table class="module-stats">
-                    <thead>
-                        <tr>
-                            <th>Open Tickets</th>
-                            <th>Critical</th>
-                            <th>Pending</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>24</td>
-                            <td>12</td>
-                            <td>8</td>
-                        </tr>
-                    </tbody>
-                </table>
+    <main>
+        <section class="hero-banner">
+            <div class="hero-content">
+                <h2>Unlimited movies, TV shows, and more.</h2>
+                <p>Watch anywhere. Cancel anytime.</p>
+                <button class="hero-button">Join Now</button>
             </div>
+        </section>
 
-            <!-- Service Requests Module -->
-            <div class="module">
-                <h3>Service Requests</h3>
-                <table class="module-stats">
-                    <thead>
-                        <tr>
-                            <th>Pending Requests</th>
-                            <th>High Priority</th>
-                            <th>New Requests</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>18</td>
-                            <td>5</td>
-                            <td>3</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Change Management Module -->
-            <div class="module">
-                <h3>Change Management</h3>
-                <table class="module-stats">
-                    <thead>
-                        <tr>
-                            <th>Active Changes</th>
-                            <th>Emergency</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>10</td>
-                            <td>3</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Reports Module -->
-            <div class="module">
-                <h3>Reports</h3>
-                <div class="module-content">
-                    <p>View detailed analytics and reports here.</p>
+        <section class="movie-carousel">
+            <h2>Trending Now</h2>
+            <div class="carousel">
+                <div class="movie-item">
+                    <img src="https://image.tmdb.org/t/p/w200/9Gtg2DzBhmYamXBS1hKAhiwbBKS.jpg" alt="Spider-Man: No Way Home">
+                    <h3>Spider-Man: No Way Home</h3>
+                </div>
+                <div class="movie-item">
+                    <img src="https://image.tmdb.org/t/p/w200/5P8SmMzSNYikXpxil6BYzJ16611.jpg" alt="The Batman">
+                    <h3>The Batman</h3>
+                </div>
+                <div class="movie-item">
+                    <img src="https://image.tmdb.org/t/p/w200/kqjL17yufvn9OVLyXYpvtyrFfak.jpg" alt="Avengers: Endgame">
+                    <h3>Avengers: Endgame</h3>
+                </div>
+                <div class="movie-item">
+                    <img src="https://image.tmdb.org/t/p/w200/9gk7adHYeDvHkCSEqAvQNLV5Uge.jpg" alt="Inception">
+                    <h3>Inception</h3>
+                </div>
+                <div class="movie-item">
+                    <img src="https://image.tmdb.org/t/p/w200/4j0PNHkMr5ax3IA8tjtxcmPU3QT.jpg" alt="Black Panther: Wakanda Forever">
+                    <h3>Black Panther: Wakanda Forever</h3>
                 </div>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
-    <!-- Footer -->
     <footer>
-        © 2024 Foo App - All Rights Reserved
+        <p>&copy; 2024 MyNetflix, Inc. All rights reserved.</p>
     </footer>
 
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #141414;
+            color: #fff;
+            line-height: 1.6;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #e50914;
+            padding: 15px 20px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            margin: 0;
+            color: #fff;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links li a:hover {
+            color: #b3b3b3;
+        }
+
+        .hero-banner {
+            background: url('https://image.tmdb.org/t/p/original/t/p/w1280//3nRpxgAAdqdm0qJ5yC81bpjAEN9.jpg') no-repeat center center/cover;
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .hero-content {
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 40px;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .hero-banner h2 {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .hero-banner p {
+            font-size: 18px;
+            margin-bottom: 20px;
+        }
+
+        .hero-button {
+            padding: 12px 24px;
+            background-color: #e50914;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .hero-button:hover {
+            background-color: #f40612;
+        }
+
+        .movie-carousel {
+            padding: 40px 20px;
+        }
+
+        .movie-carousel h2 {
+            font-size: 32px;
+            margin-bottom: 20px;
+        }
+
+        .carousel {
+            display: flex;
+            gap: 20px;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+        }
+
+        .movie-item {
+            flex: 0 0 150px;
+            text-align: center;
+        }
+
+        .movie-item img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .movie-item h3 {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #222;
+            color: #aaa;
+        }
+    </style>
 </body>
 
 </html>
